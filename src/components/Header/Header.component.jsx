@@ -27,8 +27,13 @@ function Header() {
       ) : null}
 
       <StyledSwitch>
-        <label className="switch" htmlFor="input">
-          <input type="checkbox" value={mode} onChange={() => handleToggle()} />
+        <label className="switch" htmlFor="switch-input">
+          <input
+            type="checkbox"
+            id="switch-input"
+            value={mode}
+            onChange={() => handleToggle()}
+          />
           <span className="slider round" />
         </label>
       </StyledSwitch>
