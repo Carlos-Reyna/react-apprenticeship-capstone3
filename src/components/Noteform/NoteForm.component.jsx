@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { NormalButton, TextArea, TextInput } from '../Styled/Custom.styled';
+import {
+  NormalButton,
+  StyledForm,
+  TextArea,
+  TextInput,
+} from '../Styled/Custom.styled';
 import ToolBox from '../ToolBox/ToolBox.component';
 import { useFireStore } from '../../hooks/useFirestore';
 
@@ -18,31 +23,33 @@ function NoteForm({ note, isUpdate, setShow, valueOnArchived }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isUpdate) {
-      await updateNote({
+      updateNote({
         ...newNote,
         id: note.id,
         isArchived: note.isArchived,
       });
     } else {
-      await saveNotes({ ...newNote, isArchived: false });
+      saveNotes({ ...newNote, isArchived: false });
     }
     setShow(false);
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <StyledForm onSubmit={(e) => handleSubmit(e)} title="note-form">
       <TextInput
         autoFocus
-        width="50%"
+        width="40%"
         name="title"
+        title="title-input"
         style={{ resize: 'none' }}
         placeholder="Title"
         value={newNote.title}
         onChange={(e) => handleChange(e)}
       />
       <TextInput
-        width="40%"
+        width="30%"
         name="color"
+        title="color-input"
         style={{ resize: 'none' }}
         placeholder="Color: #000"
         value={newNote.color}
@@ -51,6 +58,7 @@ function NoteForm({ note, isUpdate, setShow, valueOnArchived }) {
       <TextArea
         style={{ resize: 'none' }}
         name="text"
+        title="text-input"
         placeholder="Your text goes in here"
         value={newNote.text}
         onChange={(e) => handleChange(e)}
@@ -65,7 +73,7 @@ function NoteForm({ note, isUpdate, setShow, valueOnArchived }) {
         Dismiss
       </NormalButton>
       <NormalButton type="submit">{isUpdate ? 'Save' : 'Close'}</NormalButton>
-    </form>
+    </StyledForm>
   );
 }
 

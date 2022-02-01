@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NoteDialog from '../NoteDialog/NoteDialog';
+import NoteDialog from '../NoteDialog';
 import StyledNotes from './Notes.styled';
 
 function Notes({ validNotes, valueOnArchived }) {

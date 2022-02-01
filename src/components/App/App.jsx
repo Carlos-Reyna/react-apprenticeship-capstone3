@@ -33,7 +33,7 @@ function App() {
                 <NotesArchived />
               </ValidateSession>
             </Route>
-            <Route path="/">
+            <Route path="/" exact>
               <Landing />
             </Route>
             <Route path="*">

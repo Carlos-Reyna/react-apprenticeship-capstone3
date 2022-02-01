@@ -4,7 +4,7 @@ import { Box } from '../../components/Styled/Custom.styled';
 
 function Landing() {
   return (
-    <Box>
+    <Box minWidth="40%">
       <h1>Notes app</h1>
       <Authform />
     </Box>

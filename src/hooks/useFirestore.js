@@ -1,9 +1,32 @@
-import { collection, addDoc, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  deleteDoc,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
 import { db } from '../utils/firebaseConfig';
 import { useAppContext } from '../context/AppContext';
 
 function useFireStore() {
   const { removeNotes, updateNotes, addNotes, session } = useAppContext();
+
+  async function fetchNotes(userId) {
+    let notesArr = [];
+    const notesRef = collection(db, 'Notes');
+    const q = query(notesRef, where('userId', '==', userId));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((el) => {
+      const newObj = el.data();
+      newObj.id = el.id;
+      notesArr = [...notesArr, { ...newObj }];
+    });
+
+    return notesArr;
+  }
 
   async function saveNotes(note) {
     const noteToAdd = note;
@@ -42,7 +65,7 @@ function useFireStore() {
     await deleteDoc(doc(db, 'Notes', id));
   }
 
-  return { updateNote, saveNotes, deleteNote, archiveNote };
+  return { updateNote, saveNotes, deleteNote, archiveNote, fetchNotes };
 }
 
 export { useFireStore };

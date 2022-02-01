@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { fetchNotes } from '../utils/firestore';
 import {
   EMPTY_SEARCH_MSG,
   EMPTY_NOTES_MSG,
   EMPTY_ARCHIVE_MSG,
 } from '../utils/const';
+import { useFireStore } from './useFirestore';
 
 function useNotesFilter() {
   const { notesArr, setNotesArr, searchTerm, session } = useAppContext();
-
+  const { fetchNotes } = useFireStore();
   const [filteredNotes, setFilteredNotes] = useState([]);
   const [filterArchivedNotes, setFilteredArchivedNotes] = useState([]);
   const [notesMessage, setNotesMessage] = useState(EMPTY_NOTES_MSG);

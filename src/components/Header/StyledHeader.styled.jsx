@@ -10,5 +10,6 @@ export const StyledHeader = styled.div`
   border-right: 0;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 `;

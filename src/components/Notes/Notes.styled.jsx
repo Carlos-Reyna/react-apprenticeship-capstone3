@@ -9,6 +9,16 @@ const StyledNotes = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 10px;
   text-align: initial;
+
+  @media only screen and (max-width: 600px) {
+     {
+        grid-template-columns: repeat(1, 300px);
+    }
+  }
+
+
+
+ }
 `;
 
 StyledNotes.Title = styled.div`

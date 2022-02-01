@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Notes from '../../components/NoteList';
+import Notes from '../../components/Notes';
 import { TextArea, Box } from '../../components/Styled/Custom.styled';
-import NoteDialog from '../../components/NoteDialog/NoteDialog';
+import NoteDialog from '../../components/NoteDialog';
 import { useNotesFilter } from '../../hooks/useNotesFilter';
 import { VALUE_ON_ARCHIVE } from '../../utils/const';
 
@@ -12,7 +12,7 @@ function NoteLanding() {
   const { filteredNotes, notesMessage } = useNotesFilter();
   return (
     <Box>
-      <h1>
+      <h1 title="notes-header">
         Notes / <Link to="archived">Archived</Link>{' '}
       </h1>
       <TextArea

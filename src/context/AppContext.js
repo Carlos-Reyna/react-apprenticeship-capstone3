@@ -1,11 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { DEFAULT_USER_PROPS, EMPTY_NOTES_MSG } from '../utils/const';
+import {
+  DARK_MODE,
+  DEFAULT_USER_PROPS,
+  EMPTY_NOTES_MSG,
+  LIGHT_MODE,
+} from '../utils/const';
 
-const AppContext = React.createContext();
+export const AppContext = React.createContext();
 
 function AppProvider({ children }) {
   const [session, setSession] = useState(DEFAULT_USER_PROPS);
-  const [themeMode, setThemeMode] = useState({});
+  const [themeMode, setThemeMode] = useState(LIGHT_MODE);
   const [notesArr, setNotesArr] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [emptyMsg, setEmptyMsg] = useState(EMPTY_NOTES_MSG);
@@ -27,8 +32,9 @@ function AppProvider({ children }) {
     setNotesArr(notesCopy);
   };
 
-  const updateTheme = () => {
-    setThemeMode({});
+  const updateTheme = (value) => {
+    const theme = value ? DARK_MODE : LIGHT_MODE;
+    setThemeMode(theme);
   };
 
   return (
