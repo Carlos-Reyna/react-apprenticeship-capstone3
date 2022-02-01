@@ -24,6 +24,8 @@ const addNotes = async (newNote) => {
   setNotesArr(newNote);
 };
 
+const updateNotes = async (newNote) => newNote;
+
 describe('Note form test', () => {
   test('Note form renders', () => {
     render(
@@ -63,6 +65,80 @@ describe('Note form test', () => {
 
     setTimeout(() => {
       expect(mockNotes.length).not.toEqual(0);
+    }, 5000);
+  });
+
+  test('Note Update', async () => {
+    const noteToUpdate = {
+      title: 'note',
+      text: 'updated',
+      color: '000',
+      id: 'kzSvKFadGzF9nk0t56og',
+      isArchived: false,
+    };
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{ session: mockSession, addNotes, updateNotes }}
+      >
+        <NoteForm
+          note={noteToUpdate}
+          isUpdate
+          setShow={setShow}
+          valueOnArchived={valueOnArchived}
+        />
+      </AppContext.Provider>
+    );
+    const titleInput = getByTitle('title-input');
+    const textInput = getByTitle('text-input');
+    const colorInput = getByTitle('color-input');
+    const noteForm = getByTitle('note-form');
+    fireEvent.change(titleInput, { target: { value: 'new title update' } });
+    fireEvent.change(textInput, { target: { value: 'new text update' } });
+    fireEvent.change(colorInput, { target: { value: '#af9' } });
+
+    await waitFor(async () => {
+      await fireEvent.submit(noteForm);
+    });
+
+    setTimeout(() => {
+      expect(noteToUpdate.title).toMatch('new title update');
+    }, 5000);
+  });
+
+  test('Note Archive', async () => {
+    const noteToUpdate = {
+      title: 'note',
+      text: 'updated',
+      color: '000',
+      id: 'kzSvKFadGzF9nk0t56og',
+      isArchived: false,
+    };
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{ session: mockSession, addNotes, updateNotes }}
+      >
+        <NoteForm
+          note={noteToUpdate}
+          isUpdate
+          setShow={setShow}
+          valueOnArchived={valueOnArchived}
+        />
+      </AppContext.Provider>
+    );
+    const titleInput = getByTitle('title-input');
+    const textInput = getByTitle('text-input');
+    const colorInput = getByTitle('color-input');
+    const archiveIcon = getByTitle('archive-icon');
+    fireEvent.change(titleInput, { target: { value: 'new title' } });
+    fireEvent.change(textInput, { target: { value: 'new text' } });
+    fireEvent.change(colorInput, { target: { value: '#af9' } });
+
+    await waitFor(async () => {
+      await fireEvent.click(archiveIcon);
+    });
+
+    setTimeout(() => {
+      expect(noteToUpdate.isArchived).toMatch(true);
     }, 5000);
   });
 });

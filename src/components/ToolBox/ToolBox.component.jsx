@@ -19,8 +19,18 @@ function ToolBox({ note, setShow, valueOnArchived, noteId }) {
 
   return (
     <StyledToolBox>
-      <i className="fa fa-archive" onClick={handleArchive} aria-hidden="true" />
-      <i className="fa fa-trash" onClick={handleDelete} aria-hidden="true" />
+      <i
+        className="fa fa-archive"
+        onClick={handleArchive}
+        aria-hidden="true"
+        title="archive-icon"
+      />
+      <i
+        className="fa fa-trash"
+        onClick={handleDelete}
+        aria-hidden="true"
+        title="delete-icon"
+      />
     </StyledToolBox>
   );
 }
